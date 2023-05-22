@@ -1,0 +1,40 @@
+stages:
+  - build
+  - deploy
+
+build:
+  image: node:16
+  stage: build
+  only:
+    refs:
+      - main
+  script:
+    - yarn install
+    - yarn next build
+    - yarn next export
+  artifacts:
+    paths:
+      - out/
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - .next/cache/
+
+deploy:
+  image: alpine:latest
+  stage: deploy
+  only:
+    refs:
+      - main
+  before_script:
+    - apk update
+    - apk add openssh-client-default rsync
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -p $DEPLOYMENT_PORT $DEPLOYMENT_HOST >> ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - echo "${DEPLOYMENT_SSHKEY}" | tr -d '\r' | ssh-add - > /dev/null
+
+  script:
+    - rsync -av --delete -e "ssh -p $DEPLOYMENT_PORT" out/ "${DEPLOYMENT_USER}@${DEPLOYMENT_HOST}:${DEPLOYMENT_PATH}"

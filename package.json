@@ -1,0 +1,38 @@
+{
+  "name": "Sharmasrijan",
+  "description": "Personal website",
+  "repository": "",
+  "author": "voltages/v4ltages <contact@voltages.me>",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/styled-components": "^5.1.15",
+    "canvas-confetti": "^1.6.0",
+    "framer-motion": "^6.3.4",
+    "next": "12.1.6",
+    "prettier": "^2.4.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-icons": "^4.3.1",
+    "sharp": "^0.30.7",
+    "styled-components": "^5.3.3",
+    "use-lanyard": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.6.0",
+    "@types/node": "17.0.35",
+    "@types/react": "18.0.9",
+    "autoprefixer": "^10.4.2",
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.16",
+    "typescript": "4.7.2"
+  }
+}
